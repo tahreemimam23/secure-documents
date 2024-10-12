@@ -9,6 +9,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { DocumentUploadFormModule } from "./components/document-upload-form/document-upload-form.module";
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
         RouterOutlet,
         BrowserModule,
         CommonModule,
+        DocumentUploadFormModule,
         RouterModule.forRoot(routes)
     ],
     providers: [
