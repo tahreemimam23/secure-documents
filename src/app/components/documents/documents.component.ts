@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentService } from '../../services/document.service';
+import { DocumentUpload } from '../../models/document-upload.model';
 
 @Component({
   selector: 'app-documents',
@@ -7,15 +8,24 @@ import { DocumentService } from '../../services/document.service';
   styleUrl: './documents.component.css'
 })
 export class DocumentsComponent {
-  key:string;
+  display:boolean = false;
+  updateData:DocumentUpload={
+    key: '',
+    name: '',
+    imageUrl: '',
+    documentType: '',
+    file: undefined
+  };
   constructor(private service: DocumentService) { }
   ngOnInit() {
     //to initialize documentDetailList
     this.service.getDocumentDetailList()
   }
 
-  // fetchKey(key: string) {
-  //   this.key = key;
-  //   console.log(this.key)
-  // }
+  fetchKey(event) {
+    this.updateData.key = event.key;
+    this.updateData.documentType = event.docType;
+    this.updateData.imageUrl = event.imageUrl;
+    console.log(this.updateData.imageUrl)
+  }
 }

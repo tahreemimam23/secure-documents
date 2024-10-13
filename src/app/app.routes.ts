@@ -5,14 +5,6 @@ import { DocumentListComponent } from './components/documents/document-list/docu
 
 export const routes: Routes = [
     { path: '', redirectTo: 'document/upload', pathMatch: 'full' },
-    {
-        path:'document', component: DocumentsComponent, children: [
-            {
-                path:'upload', component:DocumentUploadFormComponent
-            },
-            {
-                path:'list', component:DocumentListComponent
-            }
-        ]
-    }
+    {path:'document/upload', component: DocumentUploadFormComponent},
+    {path:'document/list', component:DocumentsComponent},
 ];

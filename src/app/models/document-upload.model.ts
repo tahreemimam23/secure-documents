@@ -8,12 +8,4 @@ export class DocumentUpload {
     constructor(file: File) {
         this.file = file;
     }
-
-    // constructor(file: File,key:string,name:string,imageUrl:string,documentType:string) {
-    //     this.key = key;
-    //     this.name = name;
-    //     this.imageUrl=imageUrl;
-    //     this.documentType = documentType;
-    //     this.file = file;
-    // }
 }

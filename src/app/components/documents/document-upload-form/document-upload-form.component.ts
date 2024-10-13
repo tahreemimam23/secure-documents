@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DocumentService } from '../../../services/document.service';
@@ -10,6 +10,7 @@ import { DocumentUpload } from '../../../models/document-upload.model';
   styleUrl: './document-upload-form.component.css'
 })
 export class DocumentUploadFormComponent {
+  @Input() item: any = {};
   imgSrc: string = '';
   selectedImage: File;
   isSubmitted: boolean = false;
@@ -26,6 +27,7 @@ export class DocumentUploadFormComponent {
 
   ngOnInit() {
     this.resetForm();
+    console.log(this.item)
   }
 
   onSubmit(form: FormGroup) {
