@@ -5,11 +5,15 @@ export class DocumentUpload {
     public documentType:string;
     public file: File;
 
-    constructor(key:string,name:string,imageUrl:string,documentType:string,file: File) {
-        this.key = key;
-        this.name = name;
-        this.imageUrl=imageUrl;
-        this.documentType = documentType;
+    constructor(file: File) {
         this.file = file;
     }
+
+    // constructor(file: File,key:string,name:string,imageUrl:string,documentType:string) {
+    //     this.key = key;
+    //     this.name = name;
+    //     this.imageUrl=imageUrl;
+    //     this.documentType = documentType;
+    //     this.file = file;
+    // }
 }

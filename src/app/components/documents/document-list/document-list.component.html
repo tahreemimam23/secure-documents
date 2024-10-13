@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br>
+            <ng-container *ngIf="documentList$ | async as documentList">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Document Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let document of documentList">
+                            <tr>
+                                <td>
+                                    <img [src]="document.imageUrl" alt="" class="img-fluid"
+                                        style="height: 100px;width: 100px;">
+                                </td>
+                                <td>
+                                    {{document.documentType}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" (click)="upadateDocument(document.key)">Update</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" (click)="deleteDocument(document.key)">Delete</button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+    </div>
+</div>

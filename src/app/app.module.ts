@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 import { DocumentsModule } from "./components/documents/documents.module";
+import { HeaderModule } from "./components/header/header.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { DocumentsModule } from "./components/documents/documents.module";
     imports: [
         BrowserModule,
         CommonModule,
+        HeaderModule,
         DocumentsModule,
         RouterModule.forRoot(routes),
     ],
