@@ -24,7 +24,7 @@
                                     <button class="btn btn-warning" [routerLink]="['/document/upload']" [queryParams]="{key:document.key,documentType:document.documentType,imageUrl:document.imageUrl}">Update</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger" (click)="deleteDocument(document.key)">Delete</button>
+                                    <button class="btn btn-danger" (click)="deleteDocument(document)">Delete</button>
                                 </td>
                             </tr>
                         </ng-container>

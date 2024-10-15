@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { DocumentService } from '../../../services/document.service';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { DocumentUpload } from '../../../models/document-upload.model';
 
 @Component({
   selector: 'app-document-list',
@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrl: './document-list.component.css'
 })
 export class DocumentListComponent {
-  documentList$: Observable<any[]>;
+  documentList$: Observable<DocumentUpload[]>;
   constructor(private service: DocumentService) { }
   ngOnInit() {
     this.documentList$ = this.service.documentDetailList.snapshotChanges().pipe(
@@ -19,7 +19,7 @@ export class DocumentListComponent {
     );
   }
 
-  deleteDocument(key: string) {
-    this.service.deleteDocument(key);
+  deleteDocument(document: DocumentUpload) {
+    this.service.deleteDocument(document);
   }
 }

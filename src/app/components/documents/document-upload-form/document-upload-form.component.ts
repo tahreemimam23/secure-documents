@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DocumentService } from '../../../services/document.service';
@@ -34,9 +34,8 @@ export class DocumentUploadFormComponent {
           this.isUpdating=true
         }
         this.formTemplate.get('documentType').setValue(params['documentType']);
-        this.service.updateDocument(params['key'],this.formTemplate)
+        // this.service.updateDocument(params['key'],this.formTemplate)
       })
-      console.log(this.isUpdating)
   }
 
   onSubmit(form: FormGroup) {

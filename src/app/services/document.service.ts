@@ -13,10 +13,10 @@ export class DocumentService {
   constructor(private firebase: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   pushDocumentToStorage(documentUpload: DocumentUpload, formValue: any): Observable<number> {
-    var filePath = `${formValue.category}/${documentUpload.file.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
+    var filePath = `${formValue.documentType}/${documentUpload.file.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`
     const fileRef = this.storage.ref(filePath);
     documentUpload.documentType = formValue.documentType;
-    documentUpload.name = documentUpload.file.name
+    documentUpload.name = `${documentUpload.file.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
     const uploadTAsk = this.storage.upload(filePath, documentUpload.file);
     uploadTAsk.snapshotChanges()
       .pipe(
@@ -42,8 +42,21 @@ export class DocumentService {
     this.documentDetailList.push(documentDetails);
   }
 
-  deleteDocument(key: any): void {
-    this.firebase.list('documentDetails').remove(key)
+  deleteDocument(fileUpload: DocumentUpload): void {
+    this.deleteDocumentDatabase(fileUpload.key)
+      .then(() => {
+        this.deleteDocumentStorage(fileUpload.imageUrl);
+      })
+      .catch(error => console.log(error));
+  }
+
+  private deleteDocumentDatabase(key: string): Promise<void> {
+    return this.firebase.list('documentDetails').remove(key)
+  }
+
+  private deleteDocumentStorage(imageUrl: string): void {
+    const fileRef = this.storage.refFromURL(imageUrl);
+    fileRef.delete();
   }
 
   // updateDocument(key: string, imageUrl: string) {

@@ -11,7 +11,6 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 import { DocumentsModule } from "./components/documents/documents.module";
 import { HeaderModule } from "./components/header/header.module";
-import { DocUploadFormModule } from "./docs/doc-upload-form/doc-upload-form.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,7 +20,6 @@ import { DocUploadFormModule } from "./docs/doc-upload-form/doc-upload-form.modu
         CommonModule,
         HeaderModule,
         DocumentsModule,
-        DocUploadFormModule,
         RouterModule.forRoot(routes),
     ],
     providers: [
