@@ -10,7 +10,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class DocumentListComponent {
   documentList$: Observable<any[]>;
-  @Output() updateDocEvent = new EventEmitter<Object>();
   constructor(private service: DocumentService) { }
   ngOnInit() {
     this.documentList$ = this.service.documentDetailList.snapshotChanges().pipe(
@@ -22,9 +21,5 @@ export class DocumentListComponent {
 
   deleteDocument(key: string) {
     this.service.deleteDocument(key);
-  }
-
-  upadateDocument(key: string,docType:string,imageUrl:string){
-    this.updateDocEvent.emit({key,docType,imageUrl});
   }
 }

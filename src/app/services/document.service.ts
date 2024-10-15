@@ -46,7 +46,12 @@ export class DocumentService {
     this.firebase.list('documentDetails').remove(key)
   }
 
-  updateDocument(key: any, formvalue: any) {
-    this.firebase.list('documentDetails').update(key, formvalue)
+  // updateDocument(key: string, imageUrl: string) {
+  //   this.firebase.list('documentDetails').update(key, imageUrl)
+  // }
+
+  updateDocument(key: string, formValue: any) {
+    console.log(formValue.value)
+    this.firebase.list('documentDetails').update(key, formValue)
   }
 }

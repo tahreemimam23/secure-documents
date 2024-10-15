@@ -5,7 +5,7 @@
 </div>
 <div class="card mb-3" style="width:50rem">
     <div class="card-body">
-        <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate)">
+        <form [formGroup]="formTemplate" (submit)="!isUpdating?onSubmit(formTemplate):onUpdating(formTemplate)">
             <div class="text-center pb-2">
                 <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
             </div>

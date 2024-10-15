@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DocumentService } from '../../../services/document.service';
 import { DocumentUpload } from '../../../models/document-upload.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-document-upload-form',
@@ -10,12 +11,12 @@ import { DocumentUpload } from '../../../models/document-upload.model';
   styleUrl: './document-upload-form.component.css'
 })
 export class DocumentUploadFormComponent {
-  @Input() item: any = {};
   imgSrc: string = '';
   selectedImage: File;
   isSubmitted: boolean = false;
   percentage: number;
-  currentFileUpload: DocumentUpload;;
+  currentFileUpload: DocumentUpload;
+  isUpdating:boolean=false;
 
 
   formTemplate = new FormGroup({
@@ -23,14 +24,23 @@ export class DocumentUploadFormComponent {
     imageUrl: new FormControl('', Validators.required)
   })
 
-  constructor(private storage: AngularFireStorage, private service: DocumentService) { }
+  constructor(private storage: AngularFireStorage, private service: DocumentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.resetForm();
-    console.log(this.item)
+    this.route.queryParams.subscribe(
+      params => {
+        if(params['documentType']){
+          this.isUpdating=true
+        }
+        this.formTemplate.get('documentType').setValue(params['documentType']);
+        this.service.updateDocument(params['key'],this.formTemplate)
+      })
+      console.log(this.isUpdating)
   }
 
   onSubmit(form: FormGroup) {
+    console.log('saving')
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
       if (this.formTemplate.valid) {
@@ -49,6 +59,28 @@ export class DocumentUploadFormComponent {
         );
       }
     }
+  }
+
+  onUpdating(form: FormGroup) {
+    console.log('updating')
+    // this.isSubmitted = true;
+    // if (this.formTemplate.valid) {
+    //   if (this.formTemplate.valid) {
+    //     const file = this.selectedImage;
+    //     this.currentFileUpload = new DocumentUpload(file);
+    //     this.service.pushDocumentToStorage(this.currentFileUpload, form.value).subscribe(
+    //       percentage => {
+    //         this.percentage = Math.round(percentage);
+    //         if (this.percentage >= 100) {
+    //           this.resetForm();
+    //         }
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   }
+    // }
   }
 
   showPreview(event: any) {

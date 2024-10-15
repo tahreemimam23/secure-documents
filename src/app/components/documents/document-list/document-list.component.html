@@ -21,7 +21,7 @@
                                     {{document.documentType}}
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning" (click)="upadateDocument(document.key,document.documentType,document.imageUrl)">Update</button>
+                                    <button class="btn btn-warning" [routerLink]="['/document/upload']" [queryParams]="{key:document.key,documentType:document.documentType,imageUrl:document.imageUrl}">Update</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger" (click)="deleteDocument(document.key)">Delete</button>
